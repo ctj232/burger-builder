@@ -2,11 +2,64 @@ import React, { Component } from 'react';
 import axios from '../../../axios-orders';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
 import styles from './ContactData.css';
 
 class ContactData extends Component {
 	state = {
 		loading: false,
+		orderForm: {
+			name: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Your Name'
+				},
+				value: ''
+			},
+			street: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Your Street Address'
+				},
+				value: ''
+			},
+			zipCode: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Postal Code'
+				},
+				value: ''
+			},
+			country: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Country'
+				},
+				value: ''
+			},
+			email: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'email',
+					placeholder: 'Your Email'
+				},
+				value: ''
+			},
+			deliveryMethod: {
+				elementType: 'select',
+				elementConfig: {
+					options: [
+						{value: 'fastest', displayValue: 'Fastest'},
+						{value: 'cheapest', displayValue: 'Cheapest'},
+					]
+				},
+				value: ''
+			}
+		}
 	}
 
 	orderClickedHandler = (event) => {
@@ -38,12 +91,18 @@ class ContactData extends Component {
 	}
 
 	render () {
+		const formElements = [];
+		for (let key in this.state.orderForm) {
+			formElements.push({
+				id: key,
+				config: this.state.orderForm[key]
+			})
+		}
 		let form = (
 			<form>
-				<input type="text" name="name" placeholder="Your Name"/>
-				<input type="email" name="email" placeholder="Your E-Mail"/>
-				<input type="text" name="street" placeholder="Your Street Address"/>
-				<input type="text" name="postal" placeholder="Postal Code"/>
+			{ formElements.map(field => (
+				<Input elementType={field.config.elementType} elementConfig={field.config.elementConfig} value={field.config.value} key={field.id}/>
+			))}
 				<Button btnType="Success" clicked={this.orderClickedHandler}>ORDER</Button>
 			</form>
 		);
