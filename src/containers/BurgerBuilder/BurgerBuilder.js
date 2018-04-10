@@ -4,8 +4,8 @@ import Burger from '../../components/Burger/Burger';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import BuildControls from '../../components/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
-import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const INGREDIENT_PRICES = {
@@ -49,33 +49,11 @@ class BurgerBuilder extends Component {
     for (let i in this.state.ingredients) {
       queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
     }
+    queryParams.push('price=' + this.state.price)
     this.props.history.push({
       pathname: '/checkout',
       search: queryParams.join('&')
     })
-//    const order = {
-//      ingredients: this.state.ingredients,
-//      price: this.state.price,
-//      customer: {
-//        name: 'Travis Johnson',
-//        address: {
-//          street: 'Test st 1',
-//          zipCode: '41351',
-//          country: 'Netherlands',
-//        },
-//        email: 'test@test.com'
-//      },
-//      deliveryMethod: 'fastest',
-//    }
-//    axios.post('/orders.json', order).then(
-//      response => {
-//        this.setState({loading: false, purchasing: false})
-//      }
-//    ).catch(
-//      error => {
-//        this.setState({loading: false, purchasing: false})
-//      }
-//    );
   }
 
   updatePurchaseState(ingredients) {
