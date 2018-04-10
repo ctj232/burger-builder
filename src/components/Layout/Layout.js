@@ -19,7 +19,6 @@ class layout extends Component {
     <Aux>
       <Toolbar toggle={this.sideDrawerToggleHandler}/>
       <SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerToggleHandler}/>
-      <div className={styles.Header}>Sidebar</div>
       <main className={styles.Content}>
         {this.props.children}
       </main>
