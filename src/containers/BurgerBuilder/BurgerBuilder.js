@@ -37,15 +37,7 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     this.setState({loading: true})
-    const queryParams = [];
-    for (let i in this.props.ingredients) {
-      queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ingredients[i]))
-    }
-    queryParams.push('price=' + this.props.price)
-    this.props.history.push({
-      pathname: '/checkout',
-      search: queryParams.join('&')
-    })
+    this.props.history.push('/checkout')
   }
 
   isPurchasable() {

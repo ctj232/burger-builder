@@ -5,7 +5,7 @@ import styles from './CheckoutSummary.css';
 
 const checkoutSummary = (props) => {
   return (
-    <div class={styles.CheckoutSummary}>
+    <div className={styles.CheckoutSummary}>
       <h1>Enjoy your order!</h1>
       <div style={{width: '100%', margin: 'auto'}}>
         <Burger ingredients={props.ingredients}/>
